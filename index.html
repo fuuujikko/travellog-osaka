@@ -9,6 +9,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         body {
@@ -67,12 +74,31 @@
             padding: 8rem 2rem 4rem;
             text-align: center;
             margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero p {
@@ -82,29 +108,203 @@
             animation-fill-mode: both;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #FF6B35;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #FF6B35;
+        }
+
+        .app-showcase {
+            position: relative;
+            margin-top: 2rem;
+        }
+
         .app-mockup {
             width: 300px;
             height: 600px;
-            background: #fff;
+            background: #1a1a1a;
             border-radius: 30px;
             margin: 2rem auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
             animation: float 3s ease-in-out infinite;
+            border: 3px solid #333;
+            z-index: 2;
         }
 
         .app-screen {
-            width: 280px;
-            height: 580px;
-            background: #f8f8f8;
-            margin: 10px auto;
+            width: 270px;
+            height: 570px;
+            background: linear-gradient(to bottom, #FF6B35, #FF9558);
+            margin: 15px auto;
             border-radius: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: #FF6B35;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .app-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .app-dots {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .app-bg-shape {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -50%;
+            left: -50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        /* フローティングカード */
+        .floating-cards {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .float-card {
+            position: absolute;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .card-2 {
+            top: 40%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .card-3 {
+            bottom: 30%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.3;
+            }
         }
 
         /* ステップセクション */
@@ -363,6 +563,19 @@
                 font-size: 2rem;
             }
 
+            .floating-cards {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .app-showcase {
+                margin-top: 1rem;
+            }
+
             .app-mockup {
                 width: 200px;
                 height: 400px;
@@ -371,6 +584,11 @@
             .app-screen {
                 width: 180px;
                 height: 380px;
+                margin: 10px auto;
+            }
+
+            .app-content {
+                transform: scale(0.8);
             }
         }
     </style>
@@ -392,11 +610,52 @@
 
     <!-- メインビジュアル -->
     <section class="hero">
-        <h1>大阪観光をもっとスマートに！</h1>
-        <p>たこ焼きから大阪城まで、観光スポット・グルメ・体験を<br>ワンタップでチェック＆予約</p>
-        <div class="app-mockup">
-            <div class="app-screen">
-                📱
+        <div class="hero-content">
+            <h1>大阪観光をもっとスマートに！</h1>
+            <p>たこ焼きから大阪城まで、観光スポット・グルメ・体験を<br>ワンタップでチェック＆予約</p>
+            
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">
+                    <span>📱</span>
+                    <span>今すぐダウンロード</span>
+                </a>
+                <a href="#features" class="btn-secondary">
+                    <span>詳しく見る</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="app-showcase">
+            <div class="app-mockup">
+                <div class="app-screen">
+                    <div class="app-bg-shape"></div>
+                    <div class="app-content">
+                        <div class="app-logo">🏯</div>
+                        <div class="app-title">トラベルログ</div>
+                        <div class="app-subtitle">大阪観光ガイド</div>
+                    </div>
+                    <div class="app-dots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="floating-cards">
+                <div class="float-card card-1">
+                    <span class="card-icon">🍜</span>
+                    <span class="card-text">道頓堀グルメ</span>
+                </div>
+                <div class="float-card card-2">
+                    <span class="card-icon">🎢</span>
+                    <span class="card-text">USJ優先パス</span>
+                </div>
+                <div class="float-card card-3">
+                    <span class="card-icon">🏮</span>
+                    <span class="card-text">なんば散策</span>
+                </div>
             </div>
         </div>
     </section>
